@@ -34,18 +34,18 @@ public class BookServiceImpl implements BookService {
 	public Map<String, Object> addBook(String name,Book book) throws Exception {
 		Map<String,Object> result = new HashMap<String, Object>();
 		if(bookMapper.insert(book)==1){			
-			Log log = new Log("新书入库",name, 
+			Log log = new Log("newbook",name, 
 					new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),book.toString());
 			if(logMapper.insert(log)==1){
 				result.put("code", 200);
-				result.put("message", "新书入库成功");
+				result.put("message", "success");
 			}else{
 				result.put("code", 302);
-				result.put("message", "新书入库失败(日志写入出错)");
+				result.put("message", "failed, log wrong");
 			}	
 		}else{
 			result.put("code", 301);
-			result.put("message", "新书入库失败");
+			result.put("message", "failed");
 		}
 		return result;
 	}
